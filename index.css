@@ -1,0 +1,89 @@
+@import "tailwindcss";
+@import "tailwindcss" important;
+
+/* 
+.header {
+
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+
+}
+
+.logo {
+
+    width: 200px;
+    position: absolute;
+    margin: 0px;
+}
+
+.searchbar>ul {
+
+    display: flex;
+}
+
+
+.searchbar>ul>li {
+
+    margin: 10px;
+    list-style-type: none;
+    padding-top: 50px;
+
+}
+
+.restuarant {
+    padding: 20px;
+    width: 100px;
+    height: 350px;
+    border: 1px solid black;
+
+}
+
+.Shimmer-Container {
+display : flex;
+flex-wrap: wrap;
+
+}
+
+.search-btn {
+
+    display :flex;
+    padding : 10px;
+
+}
+
+.Shimmer {
+width : 100px;
+height : 200px;
+background-color: #f0f0f0;
+border: 1px solid black;
+}
+
+.img {
+
+    width: 100px;
+    height: 100px;
+
+}
+
+.resimg {
+
+    width: 100px;
+    height: 100px;
+
+}
+
+.restuarant :hover {
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.res-cards {
+    padding: 10px;
+    display: flex;
+}
+
+.search {
+
+    padding: 10px;
+} */
