@@ -1,4 +1,4 @@
-import Body from "./Body";
+import Body from "./Components/Body";
 
 function App() {
   return (
