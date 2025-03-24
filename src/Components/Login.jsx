@@ -1,9 +1,18 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { signinValidation } from "../Utils/Validation";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../Utils/Firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../Utils/userSlice";
+import { BG_URL, PHOTO_URL } from "../Utils/Constants";
 
 const Login = () => {
   const [state, setState] = useState(true);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const changeSignUp = () => {
     setState(!state);
   };
@@ -12,6 +21,7 @@ const Login = () => {
   const [errormessage, setErrormessage] = useState();
 
   //creating ref for input box
+  const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
 
@@ -23,14 +33,63 @@ const Login = () => {
     setErrormessage(meassage);
     //console.log(email.current.value,password.current.value)
     //console.log(meassage);
+    if (meassage) return;
+    if (!state) {
+      createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+        .then((userCredential) => {
+          // Signed up 
+          //console.log(userCredential);
+          const user = userCredential.user;
+          //console.log(user);
+          updateProfile(user, {
+            displayName: name.current.value, photoURL: PHOTO_URL
+          }).then(() => {
+            const { uid, email, displayName, photoURL } = auth.currentUser;
+            //console.log(auth.currentUser,'authuser');
+            dispatch(addUser({ uid: uid, email: email, displayName: displayName, photoURL: photoURL }));
+            // Profile updated!
+            // ...
+          }).catch((error) => {
+            // An error occurred
+            setErrormessage(error.message)
+            // ...
+          });
+
+
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrormessage(errorCode + " - " + errorMessage);
+          // ..
+        });
+
+    }
+    else {
+      signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          //console.log(user);
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrormessage(errorCode + " - " + errorMessage);
+        });
+
+    }
+
   };
   return (
     <div>
       <Header />
       <div className="absolute ">
         <img
-          className=" "
-          src="https://assets.gqindia.com/photos/5cdc13ab306c1c49136e3c28/16:9/w_2560%2Cc_limit/new-Bollywood-movies-on-Netflix.jpg"
+          className="m-auto "
+          src={BG_URL}
           alt="login bg img"
         />
       </div>
@@ -45,6 +104,7 @@ const Login = () => {
         )}
         {state === false && (
           <input
+            ref={name}
             type="text"
             placeholder="UserName"
             className="px-2 my-4 bg-gray-700 tex w-full  text-white"
