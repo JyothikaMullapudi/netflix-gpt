@@ -88,14 +88,14 @@ const Login = () => {
       <Header />
       <div className="absolute ">
         <img
-          className="m-auto "
+          className=" h-screen object-cover "
           src={BG_URL}
           alt="login bg img"
         />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="p-12 absolute bg-black text-white w-3/12 mx-auto right-0 left-0 my-30 rounded-2xl opacity-90"
+        className="p-12 absolute bg-black text-white w-6/12 md:w-3/12 mx-auto right-0 left-0 my-30 rounded-2xl opacity-90"
       >
         {state === true ? (
           <h1 className="font-bold text-2xl my-4">Sign In</h1>

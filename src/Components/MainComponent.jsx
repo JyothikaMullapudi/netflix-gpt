@@ -8,8 +8,8 @@ if(!movies)  return;
 const mainMovie = movies[0];
 const {original_title,overview,id}=mainMovie;
 console.log(mainMovie,'mainmovie');
-    return(<div>
-        <VideoTitle  title ={original_title} overview={overview} />
+    return(<div className="md:pt-0 pt-[50%] bg-black" >
+        <VideoTitle   title ={original_title} overview={overview} />
         <VideoBackground movieId={id} />
     </div>);
 }
