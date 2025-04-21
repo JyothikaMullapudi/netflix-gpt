@@ -3,4 +3,5 @@ function test() {
     console.log(salary)
 }
 
+
 test();
